@@ -15,6 +15,20 @@ ActiveRecord::Schema.define(version: 20170327152446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+
+  create_table "attachinary_files", force: :cascade do |t|
+    t.string   "attachinariable_type"
+    t.integer  "attachinariable_id"
+    t.string   "scope"
+    t.string   "public_id"
+    t.string   "version"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "format"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
   create_table "agendas", force: :cascade do |t|
     t.integer  "restaurant_id"
     t.integer  "event_id"
