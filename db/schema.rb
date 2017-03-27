@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327152446) do
+ActiveRecord::Schema.define(version: 20170327153007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "agendas", force: :cascade do |t|
+    t.integer  "restaurant_id"
+    t.integer  "event_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["event_id"], name: "index_agendas_on_event_id", using: :btree
+    t.index ["restaurant_id"], name: "index_agendas_on_restaurant_id", using: :btree
+  end
 
   create_table "attachinary_files", force: :cascade do |t|
     t.string   "attachinariable_type"
@@ -29,13 +37,6 @@ ActiveRecord::Schema.define(version: 20170327152446) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
-  create_table "agendas", force: :cascade do |t|
-    t.integer  "restaurant_id"
-    t.integer  "event_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["event_id"], name: "index_agendas_on_event_id", using: :btree
-    t.index ["restaurant_id"], name: "index_agendas_on_restaurant_id", using: :btree
   end
 
   create_table "dishes", force: :cascade do |t|
@@ -45,13 +46,6 @@ ActiveRecord::Schema.define(version: 20170327152446) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "dishes_restaurants", id: false, force: :cascade do |t|
-    t.integer "restaurant_id", null: false
-    t.integer "dish_id",       null: false
-    t.index ["dish_id", "restaurant_id"], name: "index_dishes_restaurants_on_dish_id_and_restaurant_id", using: :btree
-    t.index ["restaurant_id", "dish_id"], name: "index_dishes_restaurants_on_restaurant_id_and_dish_id", using: :btree
-  end
-
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.date     "date"
@@ -59,13 +53,6 @@ ActiveRecord::Schema.define(version: 20170327152446) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "events_restaurants", id: false, force: :cascade do |t|
-    t.integer "restaurant_id", null: false
-    t.integer "event_id",      null: false
-    t.index ["event_id", "restaurant_id"], name: "index_events_restaurants_on_event_id_and_restaurant_id", using: :btree
-    t.index ["restaurant_id", "event_id"], name: "index_events_restaurants_on_restaurant_id_and_event_id", using: :btree
   end
 
   create_table "menus", force: :cascade do |t|
@@ -100,6 +87,7 @@ ActiveRecord::Schema.define(version: 20170327152446) do
     t.datetime "updated_at",                          null: false
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "admin"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
