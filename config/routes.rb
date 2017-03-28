@@ -2,8 +2,9 @@ Rails.application.routes.draw do
 
 #Casein routes
 namespace :casein do
-    resources :restaurants
     resources :dishes
+    resources :menus
+    resources :restaurants
     resources :events
 end
 
