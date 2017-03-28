@@ -1,7 +1,18 @@
+<% I18n.locale = params[:locale] %>
+
 <div class="container">
   <h1>Pages#home</h1>
   <div class="padded">
     <h2><%= t('hello') %></h2>
   </div>
   <p>Find me in app/views/pages/home.html.erb</p>
+</div>
+
+<% languages = [:pt, :en, :ar] %>
+<div class="text-center">
+  <% languages.each do |language| %>
+    <% if language != I18n.locale %>
+      <%= link_to language.to_s, root_path(locale: language), class: "btn btn-default" %>
+    <% end %>
+  <% end %>
 </div>
