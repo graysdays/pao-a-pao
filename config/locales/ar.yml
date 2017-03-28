@@ -21,3 +21,11 @@
 
 ar:
   hello: "مرحبا !"
+  time:
+    formats:
+      default: "%l:%M"
+  date:
+    formats:
+      default: "%d %b %Y"
+      short: "%b %d"
+      long: "%B %d, %Y"

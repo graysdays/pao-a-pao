@@ -21,3 +21,11 @@
 
 pt:
   hello: "Olá!"
+  time:
+    formats:
+      default: "%lh%M"
+  date:
+    formats:
+      default: "%d %b %Y"
+      short: "%d %b"
+      long: "%d %b %Y"
