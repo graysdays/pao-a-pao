@@ -11,8 +11,8 @@
 
   <% menus.each do |menu| %>
     <tr>
-      <td><%= casein_table_cell_link menu.dish_id, casein_menu_path(menu) %></td>
-      <td><%= casein_table_cell_link menu.restaurant_id, casein_menu_path(menu) %></td>
+      <td><%= casein_table_cell_link menu.dish.name, casein_menu_path(menu) %></td>
+      <td><%= casein_table_cell_link menu.restaurant.name, casein_menu_path(menu) %></td>
       <td class="delete">
         <%= link_to(casein_show_row_icon("trash"), casein_menu_path(menu), method: :delete, data: { confirm: "Are you sure you want to delete this menu?" }) %>
       </td>
