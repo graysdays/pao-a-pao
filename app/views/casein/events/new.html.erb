@@ -3,7 +3,8 @@
 <h2>Add a new event</h2>
 
 <%= form_for @event, url: casein_events_path do |f| %>
-
+  <!-- Changing the locale so to fix the date-picker error -->
+  <% I18n.locale = :en %>
   <%= render partial: 'casein/events/form', locals: { f: f } %>
 
   <p class="submits">
